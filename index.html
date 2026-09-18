@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2027학년도 입학 안내 | 안산디자인문화고등학교</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#f4f7f5;color:#17251d;font-family:Arial,"Noto Sans KR","Malgun Gothic",sans-serif}
+body{padding:18px}
+.app{max-width:1160px;margin:0 auto;background:#eef3ef;border-radius:16px;overflow:visible;box-shadow:0 8px 28px rgba(24,58,39,.11)}
+.hero{background:linear-gradient(135deg,#174e32,#0f633e);color:#fff;text-align:center;border-radius:16px 16px 0 0;padding:21px 16px 17px}
+.school{font-size:13px;font-weight:700;opacity:.86;margin-bottom:7px}
+.hero h1{font-size:clamp(26px,4vw,37px);letter-spacing:-1.4px;margin:0;font-weight:900}
+.hero p{font-size:12px;line-height:1.5;margin:8px 0 0;opacity:.9;font-weight:700}
+.menu{display:flex;justify-content:center;align-items:flex-start;gap:9px;flex-wrap:wrap;padding:16px 14px;border-bottom:1px solid #dce5df;position:relative;z-index:30}
+.menu button{border:0;background:#fff;color:#17251d;padding:11px 14px;border-radius:10px;font-size:14px;font-weight:800;box-shadow:0 3px 11px rgba(0,0,0,.06);cursor:pointer;white-space:nowrap}
+.menu button:hover,.menu button.active{background:#165b39;color:#fff}
+.dept{position:relative}
+.sub{display:none;position:absolute;left:0;top:46px;min-width:178px;background:#fff;border-radius:0 0 11px 11px;padding:6px;box-shadow:0 12px 24px rgba(0,0,0,.15)}
+.sub.open{display:block}
+.sub button{display:block;width:100%;text-align:left;box-shadow:none;border-radius:7px;padding:9px 10px;font-size:13px}
+.sub button:hover{background:#eef5f0;color:#174e32}
+.tools{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;padding:17px 10px 14px}
+.nav,.zoom,.pdf{border:0;border-radius:22px;padding:10px 15px;font-size:14px;font-weight:900;cursor:pointer;text-decoration:none}
+.nav{background:#e2f0f7;color:#163e31}
+.nav:disabled{opacity:.35;cursor:default}
+.count{display:inline-block;min-width:110px;text-align:center;font-size:19px;font-weight:900;color:#111}
+.zoom{background:#fff;color:#17251d;box-shadow:0 3px 10px rgba(0,0,0,.07)}
+.pdf{background:#2167b4;color:#fff;border-radius:10px}
+.stage-wrap{position:relative;padding:0 40px 8px}
+.stage{max-width:990px;margin:0 auto;background:#fff;border-radius:13px;padding:12px;box-shadow:0 5px 19px rgba(0,0,0,.10);touch-action:pan-y}
+.spread{display:flex;justify-content:center;align-items:flex-start;gap:2px}
+.page{display:block;max-width:calc(50% - 1px);max-height:710px;object-fit:contain;cursor:zoom-in;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.page.hide{display:none}
+.cover{max-width:50%}
+.side{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border:0;border-radius:50%;background:#fff;color:#12603b;font-size:27px;box-shadow:0 4px 15px rgba(0,0,0,.14);cursor:pointer}
+.side.left{left:8px}.side.right{right:8px}.side:disabled{opacity:.28}
+.dots{display:flex;justify-content:center;gap:6px;padding:12px 0 7px}
+.dot{width:7px;height:7px;border-radius:50%;background:#c9cecb}.dot.on{background:#17603d}
+.bottom{text-align:right;padding:0 18px 14px;font-size:12px;color:#5b675f}
+.light{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);overflow:auto;padding:55px 18px 30px}
+.light.open{display:flex;justify-content:center;align-items:flex-start}
+.light img{max-width:min(1400px,96vw);height:auto}
+.close{position:fixed;right:18px;top:14px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:25px;cursor:pointer}
+@media(max-width:700px){
+ body{padding:0}.app,.hero{border-radius:0}
+ .hero{padding:17px 11px 14px}.school{font-size:12px}.hero h1{font-size:25px}.hero p{font-size:11px}
+ .menu{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:11px 8px;gap:6px}
+ .menu::-webkit-scrollbar{display:none}.menu button{padding:9px 11px;font-size:12px}
+ .sub{position:fixed;left:12px;right:12px;top:auto;min-width:0;border-radius:11px}
+ .tools{gap:6px;padding:12px 6px}.nav,.zoom,.pdf{padding:8px 10px;font-size:12px}.count{min-width:70px;font-size:15px}
+ .stage-wrap{padding:0 8px 7px}.stage{padding:6px}.spread{display:block}
+ .page,.cover{width:100%;max-width:100%;max-height:none}.page.second{display:none!important}.side{display:none}
+ .bottom{padding-right:11px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+ <div class="school">안산디자인문화고등학교</div>
+ <h1>2027학년도 입학 안내</h1>
+ <p>좌우 버튼 또는 화면 스와이프로 브로슈어를 넘겨 확인할 수 있습니다.</p>
+</header>
+
+<nav class="menu">
+ <button data-page="1">처음</button>
+ <div class="dept">
+  <button id="deptBtn" aria-expanded="false">학과소개 ▼</button>
+  <div class="sub" id="deptSub">
+   <button data-page="4">미디어콘텐츠과</button>
+   <button data-page="6">스마트경영과</button>
+   <button data-page="8">공연콘텐츠과</button>
+   <button data-page="10">시각디자인과</button>
+   <button data-page="12">패션디자인과</button>
+  </div>
+ </div>
+ <button data-page="14">진학·취업</button>
+ <button data-page="18">도제학교</button>
+ <button data-page="20">특색사업</button>
+ <button data-page="22">입학요항</button>
+ <button data-page="28">디문고 더보기</button>
+</nav>
+
+<div class="tools">
+ <button class="nav" id="prev">◀ 이전</button>
+ <span class="count" id="count">1 / 32</span>
+ <button class="nav" id="next">다음 ▶</button>
+ <button class="zoom" id="zoomBtn">🔍 크게 보기</button>
+ <a class="pdf" href="brochure.pdf" target="_blank" rel="noopener">📄 브로슈어 PDF</a>
+</div>
+
+<div class="stage-wrap">
+ <button class="side left" id="sidePrev">‹</button>
+ <main class="stage" id="stage"><div class="spread">
+  <img class="page cover" id="p1" alt="브로슈어 페이지">
+  <img class="page second" id="p2" alt="브로슈어 페이지">
+ </div></main>
+ <button class="side right" id="sideNext">›</button>
+</div>
+<div class="dots" id="dots"></div>
+<div class="bottom" id="bottom">1 / 32</div>
+</div>
+
+<div class="light" id="light">
+ <button class="close" id="close">×</button>
+ <img id="big" alt="확대된 브로슈어 페이지">
+</div>
+
+<script>
+const TOTAL=32; let current=1;
+const mobile=()=>matchMedia('(max-width:700px)').matches;
+const img=n=>`pages/page-${String(n).padStart(2,'0')}.jpg`;
+const p1=document.getElementById('p1'),p2=document.getElementById('p2');
+const count=document.getElementById('count'),bottom=document.getElementById('bottom');
+const prev=document.getElementById('prev'),next=document.getElementById('next');
+const sidePrev=document.getElementById('sidePrev'),sideNext=document.getElementById('sideNext');
+const stage=document.getElementById('stage'),deptBtn=document.getElementById('deptBtn'),deptSub=document.getElementById('deptSub');
+const light=document.getElementById('light'),big=document.getElementById('big');
+
+function normalize(n){if(n<=1)return 1; if(n>=32)return 32; return n%2===0?n:n-1}
+function label(){return (mobile()||current===1||current===32)?`${current} / 32`:`${current}–${current+1} / 32`}
+function renderDots(){
+ const box=document.getElementById('dots');box.innerHTML='';
+ const group=current===32?7:Math.min(7,Math.floor((current-1)/4));
+ for(let i=0;i<8;i++){const d=document.createElement('span');d.className='dot'+(i===group?' on':'');box.appendChild(d)}
+}
+function render(){
+ current=Math.max(1,Math.min(32,current));
+ if(!mobile())current=normalize(current);
+ p1.src=img(current);p1.dataset.page=current;
+ p1.classList.toggle('cover',!mobile()&&(current===1||current===32));
+ if(!mobile()&&current>1&&current<32){
+   p2.src=img(current+1);p2.dataset.page=current+1;p2.classList.remove('hide');
+ }else p2.classList.add('hide');
+ count.textContent=bottom.textContent=label();
+ prev.disabled=sidePrev.disabled=current===1;
+ next.disabled=sideNext.disabled=current===32;
+ renderDots();
+}
+function closeDept(){deptSub.classList.remove('open');deptBtn.classList.remove('active');deptBtn.textContent='학과소개 ▼';deptBtn.setAttribute('aria-expanded','false')}
+function go(n){current=n;render();closeDept();stage.scrollIntoView({behavior:'smooth',block:'center'})}
+deptBtn.onclick=e=>{e.stopPropagation();const o=!deptSub.classList.contains('open');deptSub.classList.toggle('open',o);deptBtn.classList.toggle('active',o);deptBtn.textContent=o?'학과소개 ▲':'학과소개 ▼';deptBtn.setAttribute('aria-expanded',o)}
+document.addEventListener('click',e=>{if(!e.target.closest('.dept'))closeDept()});
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>go(+b.dataset.page));
+
+function back(){if(mobile())go(current-1);else if(current===2)go(1);else if(current===32)go(30);else go(current-2)}
+function forward(){if(mobile())go(current+1);else if(current===1)go(2);else if(current===30)go(32);else go(current+2)}
+prev.onclick=sidePrev.onclick=back;next.onclick=sideNext.onclick=forward;
+
+function zoom(n){big.src=img(n);light.classList.add('open');document.body.style.overflow='hidden'}
+function closeZoom(){light.classList.remove('open');document.body.style.overflow=''}
+p1.onclick=()=>zoom(+p1.dataset.page);p2.onclick=()=>zoom(+p2.dataset.page);document.getElementById('zoomBtn').onclick=()=>zoom(current);
+document.getElementById('close').onclick=closeZoom;light.onclick=e=>{if(e.target===light)closeZoom()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom();if(!light.classList.contains('open')&&e.key==='ArrowLeft')back();if(!light.classList.contains('open')&&e.key==='ArrowRight')forward()});
+let sx=0;stage.addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});
+stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>55){if(d<0&&!next.disabled)forward();if(d>0&&!prev.disabled)back()}},{passive:true});
+addEventListener('resize',render);render();
+</script>
+</body>
+</html>
