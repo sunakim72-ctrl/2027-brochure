@@ -2,203 +2,236 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover">
 <title>2027학년도 입학 안내 | 안산디자인문화고등학교</title>
 <style>
+:root{--green:#254d35;--green2:#183726;--ink:#222;--shadow:0 16px 42px rgba(20,33,25,.20)}
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#f4f7f5;color:#17251d;font-family:Arial,"Noto Sans KR","Malgun Gothic",sans-serif}
-body{padding:18px}
-.app{max-width:1160px;margin:0 auto;background:#eef3ef;border-radius:16px;overflow:visible;box-shadow:0 8px 28px rgba(24,58,39,.11)}
-.hero{background:linear-gradient(135deg,#174e32,#0f633e);color:#fff;text-align:center;border-radius:16px 16px 0 0;padding:21px 16px 17px}
-.school{font-size:13px;font-weight:700;opacity:.86;margin-bottom:7px}
-.hero h1{font-size:clamp(26px,4vw,37px);letter-spacing:-1.4px;margin:0;font-weight:900}
-.hero p{font-size:12px;line-height:1.5;margin:8px 0 0;opacity:.9;font-weight:700}
-.menu{display:flex;justify-content:center;align-items:flex-start;gap:9px;flex-wrap:wrap;padding:16px 14px;border-bottom:1px solid #dce5df;position:relative;z-index:30}
-.menu button{border:0;background:#fff;color:#17251d;padding:11px 14px;border-radius:10px;font-size:14px;font-weight:800;box-shadow:0 3px 11px rgba(0,0,0,.06);cursor:pointer;white-space:nowrap}
-.menu button:hover,.menu button.active{background:#165b39;color:#fff}
-.dept{position:relative}
-.sub{display:none;position:absolute;left:0;top:46px;min-width:178px;background:#fff;border-radius:0 0 11px 11px;padding:6px;box-shadow:0 12px 24px rgba(0,0,0,.15)}
-.sub.open{display:block}
-.sub button{display:block;width:100%;text-align:left;box-shadow:none;border-radius:7px;padding:9px 10px;font-size:13px}
-.sub button:hover{background:#eef5f0;color:#174e32}
-.tools{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;padding:17px 10px 14px}
-.nav,.zoom,.pdf{border:0;border-radius:22px;padding:10px 15px;font-size:14px;font-weight:900;cursor:pointer;text-decoration:none}
-.nav{background:#e2f0f7;color:#163e31}
-.nav:disabled{opacity:.35;cursor:default}
-.count{display:inline-block;min-width:110px;text-align:center;font-size:19px;font-weight:900;color:#111}
-.zoom{background:#fff;color:#17251d;box-shadow:0 3px 10px rgba(0,0,0,.07)}
-.pdf{background:#2167b4;color:#fff;border-radius:10px}
-.stage-wrap{position:relative;padding:0 40px 8px}
-.stage{max-width:990px;margin:0 auto;background:#fff;border-radius:13px;padding:12px;box-shadow:0 5px 19px rgba(0,0,0,.10);touch-action:pan-y}
-.spread{display:flex;justify-content:center;align-items:flex-start;gap:2px}
-.page{display:block;max-width:calc(50% - 1px);max-height:710px;object-fit:contain;cursor:zoom-in;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.page.hide{display:none}
-.cover{max-width:50%}
-.side{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border:0;border-radius:50%;background:#fff;color:#12603b;font-size:27px;box-shadow:0 4px 15px rgba(0,0,0,.14);cursor:pointer}
-.side.left{left:8px}.side.right{right:8px}.side:disabled{opacity:.28}
-.dots{display:flex;justify-content:center;gap:6px;padding:12px 0 7px}
-.dot{width:7px;height:7px;border-radius:50%;background:#c9cecb}.dot.on{background:#17603d}
-.bottom{text-align:right;padding:0 18px 14px;font-size:12px;color:#5b675f}
-.light{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);overflow:auto;padding:55px 18px 30px}
-.light.open{display:flex;justify-content:center;align-items:flex-start}
-.bigspread{display:flex;justify-content:center;align-items:flex-start;gap:2px;max-width:1500px;margin:0 auto}
-.bigspread img{display:block;max-width:50%;height:auto}
-.bigspread img.hide{display:none}
-.bigspread img.single{max-width:min(760px,92vw)}
-@media(max-width:700px){.bigspread{display:block}.bigspread img{max-width:96vw;width:100%;margin:0 auto}.bigspread #big2{display:none!important}}
-.close{position:fixed;right:18px;top:14px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:25px;cursor:pointer;z-index:10001}
-.lightnav{position:fixed;top:50%;transform:translateY(-50%);z-index:10001;width:52px;height:52px;border:0;border-radius:50%;background:#fff;color:#12603b;font-size:32px;box-shadow:0 4px 16px rgba(0,0,0,.25);cursor:pointer}
-.lightleft{left:18px}.lightright{right:18px}.lightnav:disabled{opacity:.28;cursor:default}
-@media(max-width:700px){.lightnav{width:42px;height:42px;font-size:27px}.lightleft{left:7px}.lightright{right:7px}}
-@media(max-width:700px){
- body{padding:0}.app,.hero{border-radius:0}
- .hero{padding:17px 11px 14px}.school{font-size:12px}.hero h1{font-size:25px}.hero p{font-size:11px}
- .menu{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:11px 8px;gap:6px}
- .menu::-webkit-scrollbar{display:none}.menu button{padding:9px 11px;font-size:12px}
- .sub{position:fixed;left:12px;right:12px;top:auto;min-width:0;border-radius:11px}
- .tools{gap:6px;padding:12px 6px}.nav,.zoom,.pdf{padding:8px 10px;font-size:12px}.count{min-width:70px;font-size:15px}
- .stage-wrap{padding:0 8px 7px}.stage{padding:6px}.spread{display:block}
- .page,.cover{width:100%;max-width:100%;max-height:none}.page.second{display:none!important}.side{display:none}
- .bottom{padding-right:11px}
+html,body{margin:0;padding:0}
+body{font-family:"Pretendard","Noto Sans KR","Malgun Gothic",Arial,sans-serif;background:linear-gradient(180deg,#f7f9f7 0,#eef3ef 100%);color:var(--ink)}
+.wrap{max-width:1280px;margin:0 auto;padding:24px 18px 40px}
+.hero{background:var(--green);color:#fff;border-radius:18px 18px 0 0;padding:22px 24px 20px;text-align:center;box-shadow:var(--shadow)}
+.hero .eyebrow{font-size:14px;opacity:.82;letter-spacing:.06em;margin-bottom:7px}
+.hero h1{margin:0;font-size:clamp(22px,3vw,34px);line-height:1.3}
+.hero p{margin:10px 0 0;font-size:14px;opacity:.88}
+.viewer{background:#e9ede9;border-radius:0 0 18px 18px;padding:22px;box-shadow:var(--shadow);overflow:hidden}
+.toolbar{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+button,.download{appearance:none;border:1px solid #cbd3cc;background:#fff;color:#243329;border-radius:10px;padding:10px 14px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+button:hover,.download:hover{background:#f6faf6}
+button:disabled{opacity:.35;cursor:default}
+.primary{background:var(--green);border-color:var(--green);color:#fff}.primary:hover{background:var(--green2)}
+.counter{min-width:112px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums;color:#33473b}
+.download-group{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-left:4px}
+.download.important{border:0;color:#fff;padding:11px 16px;font-size:14px;font-weight:800;box-shadow:0 4px 12px rgba(25,70,130,.24);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.download.important:hover{color:#fff;transform:translateY(-2px);filter:brightness(1.03)}
+.download.pdf-btn{background:#245aa8}.download.form-btn{background:#e57a1f}
+.book-shell{position:relative;perspective:2200px;max-width:1120px;margin:0 auto;touch-action:pan-y pinch-zoom;user-select:none}
+.book{display:flex;align-items:stretch;justify-content:center;min-height:340px;transform-style:preserve-3d;transition:transform .18s ease}
+.page{position:relative;background:#fff;overflow:hidden;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.16);transform-style:preserve-3d;backface-visibility:hidden}
+.page img{display:block;width:100%;height:auto;max-height:74vh;object-fit:contain;background:#fff}
+.page.left{border-radius:12px 2px 2px 12px;transform-origin:right center}
+.page.right{border-radius:2px 12px 12px 2px;transform-origin:left center}
+.page.left:after,.page.right:before{content:"";position:absolute;top:0;bottom:0;width:26px;pointer-events:none;z-index:2}
+.page.left:after{right:0;background:linear-gradient(90deg,transparent,rgba(0,0,0,.10))}
+.page.right:before{left:0;background:linear-gradient(90deg,rgba(0,0,0,.10),transparent)}
+.spread .page{width:50%}.cover .page{width:min(560px,78%);border-radius:12px}.cover .page:before,.cover .page:after{display:none}
+.turn-next{animation:turnNext .46s cubic-bezier(.4,0,.2,1)}.turn-prev{animation:turnPrev .46s cubic-bezier(.4,0,.2,1)}
+@keyframes turnNext{0%{transform:rotateY(0)}45%{transform:rotateY(-10deg) translateX(-8px)}100%{transform:rotateY(0)}}
+@keyframes turnPrev{0%{transform:rotateY(0)}45%{transform:rotateY(10deg) translateX(8px)}100%{transform:rotateY(0)}}
+.hint{text-align:center;margin:14px 0 0;color:#5b675f;font-size:13px}.mobile-note{display:none}
+.mobile-zoom-controls{display:none}
+.progress{height:5px;border-radius:999px;background:#d5ddd7;overflow:hidden;max-width:720px;margin:16px auto 0}.progress>span{display:block;height:100%;background:var(--green);width:0;transition:width .25s ease}
+
+    .section-menu{display:flex;justify-content:center;align-items:flex-start;gap:8px;flex-wrap:wrap;margin:0 0 16px;position:relative;z-index:20}
+    .section-menu button{white-space:nowrap}
+    .dept-menu{position:relative}
+    .dept-sub{display:none;position:absolute;left:0;top:44px;min-width:178px;background:#fff;border:1px solid #d7ded8;border-radius:10px;padding:6px;box-shadow:0 10px 24px rgba(0,0,0,.15);z-index:30}
+    .dept-sub.open{display:block}
+    .dept-sub button{display:block;width:100%;text-align:left;box-shadow:none;border:0}
+
+@media(max-width:760px){
+  .section-menu{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:0 2px}.section-menu::-webkit-scrollbar{display:none}.dept-sub{position:fixed;left:12px;right:12px;top:auto;min-width:0}.wrap{padding:0 0 16px}.hero{border-radius:0;padding:18px 14px}.viewer{border-radius:0;padding:14px 8px 16px;box-shadow:none}
+  .hero .eyebrow{font-size:12px}.hero h1{font-size:clamp(18px,5.2vw,26px);line-height:1.28;word-break:keep-all;white-space:nowrap;letter-spacing:-.03em}.hero p{font-size:12px;line-height:1.55;word-break:keep-all}
+  .toolbar{gap:8px;margin-bottom:14px}.toolbar button{padding:10px 12px;font-size:14px}.counter{min-width:86px;font-size:14px}
+  .download-group{width:100%;justify-content:center;margin:6px 6px 0}.download.important{flex:1 1 100%;text-align:center;padding:13px 10px;font-size:14px}
+  .mobile-zoom-controls{display:flex;justify-content:center;align-items:center;gap:8px;margin:10px 0 2px}.mobile-zoom-controls button{min-width:46px;padding:8px 12px}.mobile-zoom-controls .zoom-level{min-width:64px;text-align:center;font-size:13px;font-weight:800;color:#435147}
+  .book-shell{width:100%;max-width:none;padding:0 6px;touch-action:none;overflow:visible}.book{min-height:0;width:100%;transform-origin:center center;will-change:transform}
+  .spread .page,.cover .page{width:min(94vw,620px);aspect-ratio:1100/1556;flex:0 0 auto}.spread .page.left{display:none}.spread .page.right{border-radius:9px}.spread .page.right:before{display:none}
+  .page img{max-height:none;width:100%;height:100%;object-fit:contain}
+  .turn-next,.turn-prev{animation:none!important}
+  .mobile-note{display:block;text-align:center;font-size:12px;color:#657269;margin:10px 0 0}.book.zoomed{cursor:grab}.book.zoomed:active{cursor:grabbing}.hint{font-size:12px;line-height:1.55;margin:10px 8px 0}.progress{margin:12px 8px 0}
 }
 </style>
 </head>
 <body>
-<div class="app">
-<header class="hero">
- <div class="school">안산디자인문화고등학교</div>
- <h1>2027학년도 입학 안내</h1>
- <p>좌우 버튼 또는 화면 스와이프로 브로슈어를 넘겨 확인할 수 있습니다.</p>
-</header>
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">안산디자인문화고등학교</div>
+    <h1>2027학년도 입학 안내</h1>
+    <p>좌우 버튼 또는 화면 스와이프로 브로슈어를 넘겨 확인할 수 있습니다.</p>
+  </section>
+  <section class="viewer" id="viewer">
 
-<nav class="menu">
- <button data-page="1">처음</button>
- <div class="dept">
-  <button id="deptBtn" aria-expanded="false">학과소개 ▼</button>
-  <div class="sub" id="deptSub">
-   <button data-page="4">미디어콘텐츠과</button>
-   <button data-page="6">스마트경영과</button>
-   <button data-page="8">공연콘텐츠과</button>
-   <button data-page="10">시각디자인과</button>
-   <button data-page="12">패션디자인과</button>
-  </div>
- </div>
- <button data-page="14">진학·취업</button>
- <button data-page="18">도제학교</button>
- <button data-page="20">특색사업</button>
- <button data-page="22">입학요항</button>
- <button data-page="28">디문고 더보기</button>
-</nav>
+    <div class="section-menu">
+      <button type="button" data-goto="0">처음</button>
+      <div class="dept-menu">
+        <button type="button" id="deptBtn">학과소개 ▼</button>
+        <div class="dept-sub" id="deptSub">
+          <button type="button" data-goto="3">미디어콘텐츠과</button>
+          <button type="button" data-goto="5">스마트경영과</button>
+          <button type="button" data-goto="7">공연콘텐츠과</button>
+          <button type="button" data-goto="9">시각디자인과</button>
+          <button type="button" data-goto="11">패션디자인과</button>
+        </div>
+      </div>
+      <button type="button" data-goto="13">진학·취업</button>
+      <button type="button" data-goto="17">도제학교</button>
+      <button type="button" data-goto="19">특색사업</button>
+      <button type="button" data-goto="21">입학요항</button>
+      <button type="button" data-goto="27">디문고 더보기</button>
+    </div>
 
-<div class="tools">
- <button class="nav" id="prev">◀ 이전</button>
- <span class="count" id="count">1 / 32</span>
- <button class="nav" id="next">다음 ▶</button>
- <button class="zoom" id="zoomBtn">🔍 크게 보기</button>
- <a class="pdf" href="brochure.pdf" target="_blank" rel="noopener">📄 입학안내 PDF 다운로드</a>
+    <div class="toolbar">
+      <button id="prev" aria-label="이전 페이지">◀ 이전</button>
+      <span class="counter" id="counter">1 / 32</span>
+      <button id="next" class="primary" aria-label="다음 페이지">다음 ▶</button>
+      <button id="zoom" title="새 창에서 현재 페이지 크게 보기">🔍 크게 보기</button>
+      <div class="download-group">
+        <a class="download important pdf-btn" href="brochure.pdf" download="2027학년도_입학안내_안산디자인문화고.pdf">📄 입학안내 PDF 다운로드</a>
+      </div>
+    </div>
+    <div class="book-shell" id="shell"><div class="book cover" id="book" aria-live="polite"></div></div>
+    <div class="mobile-zoom-controls" aria-label="문서 확대 축소">
+      <button type="button" id="zoomOutMobile" aria-label="축소">−</button>
+      <span class="zoom-level" id="zoomLevelMobile">100%</span>
+      <button type="button" id="zoomInMobile" aria-label="확대">＋</button>
+      <button type="button" id="zoomResetMobile" aria-label="확대 초기화">원래크기</button>
+    </div>
+    <div class="mobile-note">휴대전화에서는 한 페이지씩 표시되며, 두 손가락으로 확대·축소할 수 있습니다.</div>
+    <div class="hint">페이지의 왼쪽·오른쪽을 클릭하거나 화면을 좌우로 밀고, 키보드 ← → 키로도 이동할 수 있습니다.</div>
+    <div class="progress"><span id="bar"></span></div>
+  </section>
 </div>
-
-<div class="stage-wrap">
- <button class="side left" id="sidePrev">‹</button>
- <main class="stage" id="stage"><div class="spread">
-  <img class="page cover" id="p1" alt="브로슈어 페이지">
-  <img class="page second" id="p2" alt="브로슈어 페이지">
- </div></main>
- <button class="side right" id="sideNext">›</button>
-</div>
-<div class="dots" id="dots"></div>
-<div class="bottom" id="bottom">1 / 32</div>
-</div>
-
-<div class="light" id="light">
- <button class="close" id="close">×</button>
- <button class="lightnav lightleft" id="lightPrev" aria-label="이전 펼침">‹</button>
- <button class="lightnav lightright" id="lightNext" aria-label="다음 펼침">›</button>
- <div class="bigspread" id="bigspread">
-  <img id="big1" alt="확대된 브로슈어 페이지">
-  <img id="big2" alt="확대된 브로슈어 페이지">
- </div>
-</div>
-
 <script>
-const TOTAL=32; let current=1;
-const mobile=()=>matchMedia('(max-width:700px)').matches;
-const img=n=>`page-${String(n).padStart(2,'0')}.jpg`;
-const p1=document.getElementById('p1'),p2=document.getElementById('p2');
-const count=document.getElementById('count'),bottom=document.getElementById('bottom');
-const prev=document.getElementById('prev'),next=document.getElementById('next');
-const sidePrev=document.getElementById('sidePrev'),sideNext=document.getElementById('sideNext');
-const stage=document.getElementById('stage'),deptBtn=document.getElementById('deptBtn'),deptSub=document.getElementById('deptSub');
-const light=document.getElementById('light'),big1=document.getElementById('big1'),big2=document.getElementById('big2'),lightPrev=document.getElementById('lightPrev'),lightNext=document.getElementById('lightNext'); let zoomCurrent=1;
+const pages=Array.from({length:32},(_,i)=>`page-${String(i+1).padStart(2,'0')}.jpg`);
+pages.forEach(src=>{const im=new Image();im.src=src;});
+const book=document.getElementById('book'),prev=document.getElementById('prev'),next=document.getElementById('next'),counter=document.getElementById('counter'),bar=document.getElementById('bar');
+let index=0,animating=false,swiped=false,sx=0,pinching=false;
+let zoomScale=1,zoomX=0,zoomY=0,startDist=0,startScale=1,startMidX=0,startMidY=0,startZoomX=0,startZoomY=0,panStartX=0,panStartY=0,panBaseX=0,panBaseY=0,gestureMode='';
+function applyMobileZoom(){
+  const zl=document.getElementById('zoomLevelMobile');
+  if(!isMobile()){book.style.transform='';book.classList.remove('zoomed');if(zl)zl.textContent='100%';return;}
+  zoomScale=Math.max(1,Math.min(4,zoomScale));
+  if(zoomScale===1){zoomX=0;zoomY=0;book.classList.remove('zoomed')}else{book.classList.add('zoomed')}
+  book.style.transform=`translate(${zoomX}px,${zoomY}px) scale(${zoomScale})`;
+  if(zl)zl.textContent=Math.round(zoomScale*100)+'%';
+}
+function resetMobileZoom(){zoomScale=1;zoomX=0;zoomY=0;applyMobileZoom()}
+function touchDist(a,b){return Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY)}
+function touchMid(a,b){return{x:(a.clientX+b.clientX)/2,y:(a.clientY+b.clientY)/2}}
 
-function normalize(n){if(n<=1)return 1; if(n>=32)return 32; return n%2===0?n:n-1}
-function label(){return (mobile()||current===1||current===32)?`${current} / 32`:`${current}–${current+1} / 32`}
-function renderDots(){
- const box=document.getElementById('dots');box.innerHTML='';
- const group=current===32?7:Math.min(7,Math.floor((current-1)/4));
- for(let i=0;i<8;i++){const d=document.createElement('span');d.className='dot'+(i===group?' on':'');box.appendChild(d)}
+function isMobile(){return window.matchMedia('(max-width:760px)').matches}
+function spreadFor(i){if(isMobile())return[i];if(i===0)return[0];const left=i%2===1?i:i-1;return[left,left+1].filter(x=>x<pages.length)}
+function labelFor(ids){return ids.length===1?`${ids[0]+1} / ${pages.length}`:`${ids[0]+1}-${ids[ids.length-1]+1} / ${pages.length}`}
+function render(dir){
+  if(isMobile())resetMobileZoom();
+  const ids=spreadFor(index);book.className='book '+(ids.length===1?'cover':'spread');book.innerHTML='';
+  ids.forEach((id,k)=>{const p=document.createElement('div');p.className='page '+(ids.length===1?'right':(k===0?'left':'right'));const img=document.createElement('img');img.src=pages[id];img.alt=`입학안내 ${id+1}페이지`;img.draggable=false;p.appendChild(img);book.appendChild(p)});
+  if(dir){book.classList.add(dir==='next'?'turn-next':'turn-prev');setTimeout(()=>book.classList.remove('turn-next','turn-prev'),470)}
+  counter.textContent=labelFor(ids);prev.disabled=index===0;next.disabled=index>=pages.length-1;bar.style.width=((ids[ids.length-1]+1)/pages.length*100)+'%';
 }
-function render(){
- current=Math.max(1,Math.min(32,current));
- if(!mobile())current=normalize(current);
- p1.src=img(current);p1.dataset.page=current;
- p1.classList.toggle('cover',!mobile()&&(current===1||current===32));
- if(!mobile()&&current>1&&current<32){
-   p2.src=img(current+1);p2.dataset.page=current+1;p2.classList.remove('hide');
- }else p2.classList.add('hide');
- count.textContent=bottom.textContent=label();
- prev.disabled=sidePrev.disabled=current===1;
- next.disabled=sideNext.disabled=current===32;
- renderDots();
-}
-function closeDept(){deptSub.classList.remove('open');deptBtn.classList.remove('active');deptBtn.textContent='학과소개 ▼';deptBtn.setAttribute('aria-expanded','false')}
-function go(n){current=n;render();closeDept();stage.scrollIntoView({behavior:'smooth',block:'center'})}
-deptBtn.onclick=e=>{e.stopPropagation();const o=!deptSub.classList.contains('open');deptSub.classList.toggle('open',o);deptBtn.classList.toggle('active',o);deptBtn.textContent=o?'학과소개 ▲':'학과소개 ▼';deptBtn.setAttribute('aria-expanded',o)}
-document.addEventListener('click',e=>{if(!e.target.closest('.dept'))closeDept()});
-document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>go(+b.dataset.page));
+function goNext(){if(animating||index>=pages.length-1)return;animating=true;index=isMobile()?index+1:(index===0?1:Math.min(index+2,pages.length-1));render('next');setTimeout(()=>animating=false,480)}
+function goPrev(){if(animating||index<=0)return;animating=true;index=isMobile()?index-1:(index<=1?0:Math.max(1,index-2));render('prev');setTimeout(()=>animating=false,480)}
+prev.addEventListener('click',goPrev);next.addEventListener('click',goNext);
 
-function back(){if(mobile())go(current-1);else if(current===2)go(1);else if(current===32)go(30);else go(current-2)}
-function forward(){if(mobile())go(current+1);else if(current===1)go(2);else if(current===30)go(32);else go(current+2)}
-prev.onclick=sidePrev.onclick=back;next.onclick=sideNext.onclick=forward;
+const deptBtn=document.getElementById('deptBtn'),deptSub=document.getElementById('deptSub');
+deptBtn.addEventListener('click',e=>{e.stopPropagation();const open=deptSub.classList.toggle('open');deptBtn.textContent=open?'학과소개 ▲':'학과소개 ▼'});
+document.addEventListener('click',e=>{if(!e.target.closest('.dept-menu')){deptSub.classList.remove('open');deptBtn.textContent='학과소개 ▼'}});
+document.querySelectorAll('[data-goto]').forEach(btn=>btn.addEventListener('click',()=>{
+  index=Number(btn.dataset.goto);render();
+  deptSub.classList.remove('open');deptBtn.textContent='학과소개 ▼';
+}));
 
-function zoom(n){
- let start=n;
- if(!mobile()){
-   if(n===1||n===32){start=n;}
-   else start=(n%2===0)?n:n-1;
- }
- zoomCurrent=start;
- big1.src=img(start);big1.classList.toggle('single',mobile()||start===1||start===32);
- if(!mobile()&&start>1&&start<32){
-   big2.src=img(start+1);big2.classList.remove('hide');
- }else{
-   big2.classList.add('hide');
- }
- lightPrev.disabled=start===1;
- lightNext.disabled=start===32;
- light.classList.add('open');document.body.style.overflow='hidden';
-}
-function zoomBack(){
- if(mobile()) zoom(Math.max(1,zoomCurrent-1));
- else if(zoomCurrent===2) zoom(1);
- else if(zoomCurrent===32) zoom(30);
- else zoom(Math.max(1,zoomCurrent-2));
-}
-function zoomForward(){
- if(mobile()) zoom(Math.min(32,zoomCurrent+1));
- else if(zoomCurrent===1) zoom(2);
- else if(zoomCurrent===30) zoom(32);
- else zoom(Math.min(32,zoomCurrent+2));
-}
-lightPrev.onclick=zoomBack; lightNext.onclick=zoomForward;
-function closeZoom(){light.classList.remove('open');document.body.style.overflow=''}
-p1.onclick=()=>zoom(+p1.dataset.page);p2.onclick=()=>zoom(+p2.dataset.page);document.getElementById('zoomBtn').onclick=()=>zoom(current);
-document.getElementById('close').onclick=closeZoom;light.onclick=e=>{if(e.target===light)closeZoom()};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom();if(light.classList.contains('open')&&e.key==='ArrowLeft')zoomBack();else if(!light.classList.contains('open')&&e.key==='ArrowLeft')back();if(light.classList.contains('open')&&e.key==='ArrowRight')zoomForward();else if(!light.classList.contains('open')&&e.key==='ArrowRight')forward()});
-let zsx=0;light.addEventListener('touchstart',e=>zsx=e.changedTouches[0].clientX,{passive:true});light.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-zsx;if(Math.abs(d)>55){if(d<0&&!lightNext.disabled)zoomForward();if(d>0&&!lightPrev.disabled)zoomBack()}},{passive:true});
-let sx=0;stage.addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});
-stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>55){if(d<0&&!next.disabled)forward();if(d>0&&!prev.disabled)back()}},{passive:true});
-addEventListener('resize',render);render();
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goNext();if(e.key==='ArrowLeft')goPrev()});
+const shell=document.getElementById('shell');
+shell.addEventListener('touchstart',e=>{
+  if(!isMobile())return;
+  swiped=false;
+  if(e.touches.length===2){
+    e.preventDefault();pinching=true;gestureMode='pinch';
+    startDist=touchDist(e.touches[0],e.touches[1]);startScale=zoomScale;
+    const m=touchMid(e.touches[0],e.touches[1]);startMidX=m.x;startMidY=m.y;startZoomX=zoomX;startZoomY=zoomY;
+    return;
+  }
+  if(e.touches.length===1){
+    const t=e.touches[0];sx=t.screenX;
+    if(zoomScale>1){e.preventDefault();gestureMode='pan';panStartX=t.clientX;panStartY=t.clientY;panBaseX=zoomX;panBaseY=zoomY}
+    else{gestureMode='swipe'}
+  }
+},{passive:false});
+shell.addEventListener('touchmove',e=>{
+  if(!isMobile())return;
+  if(e.touches.length===2){
+    e.preventDefault();pinching=true;gestureMode='pinch';
+    const d=touchDist(e.touches[0],e.touches[1]);
+    zoomScale=Math.max(1,Math.min(4,startScale*(d/startDist)));
+    const m=touchMid(e.touches[0],e.touches[1]);
+    zoomX=startZoomX+(m.x-startMidX);zoomY=startZoomY+(m.y-startMidY);applyMobileZoom();
+  }else if(e.touches.length===1&&gestureMode==='pan'&&zoomScale>1){
+    e.preventDefault();const t=e.touches[0];zoomX=panBaseX+(t.clientX-panStartX);zoomY=panBaseY+(t.clientY-panStartY);applyMobileZoom();
+  }
+},{passive:false});
+shell.addEventListener('touchend',e=>{
+  if(!isMobile())return;
+  if(gestureMode==='pinch'){
+    if(e.touches.length<2){pinching=false;if(zoomScale<1.08)resetMobileZoom();gestureMode='';}
+    return;
+  }
+  if(gestureMode==='pan'){if(e.touches.length===0)gestureMode='';return;}
+  if(gestureMode==='swipe'&&e.changedTouches.length){
+    const dx=e.changedTouches[0].screenX-sx;
+    if(Math.abs(dx)>45){swiped=true;(dx<0?goNext():goPrev)();setTimeout(()=>swiped=false,350)}
+  }
+  gestureMode='';
+},{passive:false});
+shell.addEventListener('dblclick',()=>{if(isMobile())resetMobileZoom()});
+book.addEventListener('click',e=>{if(swiped||animating||(isMobile()&&zoomScale>1.02))return;const page=e.target.closest('.page');if(!page)return;if(isMobile()||book.classList.contains('cover')){const r=page.getBoundingClientRect();(e.clientX<r.left+r.width/2?goPrev:goNext)()}else{(page.classList.contains('left')?goPrev:goNext)()}});
+
+// 모바일 확대/축소 보조 버튼: 브라우저별 핀치 제스처 차이에 대한 확실한 대안
+document.getElementById('zoomInMobile').addEventListener('click',()=>{if(!isMobile())return;zoomScale=Math.min(4,zoomScale+0.5);applyMobileZoom()});
+document.getElementById('zoomOutMobile').addEventListener('click',()=>{if(!isMobile())return;zoomScale=Math.max(1,zoomScale-0.5);if(zoomScale===1){zoomX=0;zoomY=0}applyMobileZoom()});
+document.getElementById('zoomResetMobile').addEventListener('click',()=>{if(isMobile())resetMobileZoom()});
+
+// iOS/Safari 계열의 gesture 이벤트도 함께 지원
+let gestureBaseScale=1;
+shell.addEventListener('gesturestart',e=>{if(!isMobile())return;e.preventDefault();gestureBaseScale=zoomScale;pinching=true;},{passive:false});
+shell.addEventListener('gesturechange',e=>{if(!isMobile())return;e.preventDefault();zoomScale=Math.max(1,Math.min(4,gestureBaseScale*e.scale));applyMobileZoom();},{passive:false});
+shell.addEventListener('gestureend',e=>{if(!isMobile())return;e.preventDefault();pinching=false;if(zoomScale<1.08)resetMobileZoom();},{passive:false});
+
+document.getElementById('zoom').addEventListener('click',()=>{
+  const pageUrls=pages.map(src=>new URL(src,location.href).href);
+  const w=window.open('','_blank');
+  if(!w){alert('팝업이 차단되어 있습니다. 팝업을 허용한 뒤 다시 시도해 주세요.');return;}
+  const title='2027학년도 입학 안내 크게 보기';
+  const initial=index;
+  w.document.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover"><title>${title}</title><style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;min-height:100%;background:#222;color:#fff;font-family:"Pretendard","Noto Sans KR","Malgun Gothic",Arial,sans-serif}body{padding:16px;overflow:auto}.zoom-wrap{position:relative;min-height:calc(100vh - 32px);display:flex;align-items:center;justify-content:center;touch-action:pan-y pinch-zoom;user-select:none}.spread{display:flex;align-items:stretch;justify-content:center;max-width:1500px;width:100%}.zoom-page{position:relative;background:#fff;box-shadow:0 12px 34px rgba(0,0,0,.35);overflow:hidden;cursor:pointer;flex:0 1 50%;max-width:50%}.zoom-page img{display:block;width:100%;height:auto;max-height:calc(100vh - 32px);object-fit:contain}.zoom-left{border-radius:10px 0 0 10px}.zoom-right{border-radius:0 10px 10px 0}.single .zoom-page{flex:0 1 auto;max-width:min(900px,96vw);border-radius:10px}.single .zoom-page img{max-height:calc(100vh - 32px)}.counter{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(0,0,0,.68);padding:8px 13px;border-radius:999px;font-weight:800;font-size:14px;backdrop-filter:blur(6px);pointer-events:none}.navhint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(0,0,0,.58);padding:7px 12px;border-radius:999px;font-size:12px;white-space:nowrap;pointer-events:none;opacity:.86}.edge{position:fixed;top:0;bottom:0;width:18%;z-index:8;cursor:pointer}.edge.prev{left:0}.edge.next{right:0}@media(max-width:760px){body{padding:8px}.zoom-wrap{min-height:calc(100vh - 16px);display:block}.spread,.single{display:block;width:100%}.spread .zoom-page,.single .zoom-page{max-width:96vw;width:96vw;margin:0 auto;border-radius:10px}.spread .zoom-page.left{display:none}.zoom-page img,.single .zoom-page img{width:100%;height:auto;max-height:none}.navhint{font-size:11px;bottom:8px}.counter{top:8px}}
+</style></head><body><div id="counter" class="counter"></div><div id="wrap" class="zoom-wrap"></div><div class="edge prev" id="edgePrev" aria-label="이전 페이지"></div><div class="edge next" id="edgeNext" aria-label="다음 페이지"></div><div class="navhint">화면 왼쪽·오른쪽 클릭 또는 ← → 키로 페이지 이동</div><script>
+const pages=${JSON.stringify(pageUrls)};let index=${initial};
+const wrap=document.getElementById('wrap'),counter=document.getElementById('counter');
+const mobile=()=>matchMedia('(max-width:760px)').matches;
+function idsFor(i){if(mobile())return[i];if(i===0)return[0];const left=i%2===1?i:i-1;return[left,left+1].filter(x=>x<pages.length)}
+function render(){const ids=idsFor(index);wrap.innerHTML='';const holder=document.createElement('div');holder.className=ids.length===1?'single':'spread';ids.forEach((id,k)=>{const p=document.createElement('div');p.className='zoom-page '+(ids.length===2?(k===0?'zoom-left left':'zoom-right right'):'');const img=document.createElement('img');img.src=pages[id];img.alt='입학안내 '+(id+1)+'페이지';img.draggable=false;p.appendChild(img);p.addEventListener('click',e=>{e.stopPropagation();if(mobile()||ids.length===1){const r=p.getBoundingClientRect();e.clientX<r.left+r.width/2?goPrev():goNext()}else{k===0?goPrev():goNext()}});holder.appendChild(p)});wrap.appendChild(holder);counter.textContent=ids.length===1?(ids[0]+1)+' / '+pages.length:(ids[0]+1)+'-'+(ids[ids.length-1]+1)+' / '+pages.length}
+function goNext(){if(index>=pages.length-1)return;index=mobile()?index+1:(index===0?1:Math.min(index+2,pages.length-1));render()}
+function goPrev(){if(index<=0)return;index=mobile()?index-1:(index<=1?0:Math.max(1,index-2));render()}
+document.getElementById('edgePrev').addEventListener('click',goPrev);document.getElementById('edgeNext').addEventListener('click',goNext);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')goPrev();if(e.key==='ArrowRight')goNext()});
+let sx=0,sy=0,active=false;wrap.addEventListener('touchstart',e=>{if(e.touches.length!==1){active=false;return}active=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});wrap.addEventListener('touchend',e=>{if(!active||!e.changedTouches.length)return;active=false;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.2){dx<0?goNext():goPrev()}},{passive:true});
+let wasMobile=mobile();addEventListener('resize',()=>{const now=mobile();if(now!==wasMobile){wasMobile=now;render()}});render();
+<\/script></body></html>`);w.document.close();
+});
+let lastMobile=isMobile();window.addEventListener('resize',()=>{const now=isMobile();if(now!==lastMobile){lastMobile=now;resetMobileZoom();render()}});
+render();
 </script>
 </body>
 </html>
