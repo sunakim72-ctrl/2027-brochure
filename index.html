@@ -95,7 +95,7 @@ body{padding:18px}
  <span class="count" id="count">1 / 32</span>
  <button class="nav" id="next">다음 ▶</button>
  <button class="zoom" id="zoomBtn">🔍 크게 보기</button>
- <a class="pdf" href="https://sunakim72-ctrl.github.io/2027-brochure/brochure.pdf" target="_blank" rel="noopener">📄 입학안내 PDF 다운로드</a>
+ <a class="pdf" href="brochure.pdf" target="_blank" rel="noopener">📄 입학안내 PDF 다운로드</a>
 </div>
 
 <div class="stage-wrap">
@@ -123,7 +123,7 @@ body{padding:18px}
 <script>
 const TOTAL=32; let current=1;
 const mobile=()=>matchMedia('(max-width:700px)').matches;
-const img=n=>`https://sunakim72-ctrl.github.io/2027-brochure/pages/page-${String(n).padStart(2,'0')}.jpg`;
+const img=n=>`page-${String(n).padStart(2,'0')}.jpg`;
 const p1=document.getElementById('p1'),p2=document.getElementById('p2');
 const count=document.getElementById('count'),bottom=document.getElementById('bottom');
 const prev=document.getElementById('prev'),next=document.getElementById('next');
