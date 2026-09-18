@@ -41,8 +41,15 @@ body{padding:18px}
 .bottom{text-align:right;padding:0 18px 14px;font-size:12px;color:#5b675f}
 .light{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);overflow:auto;padding:55px 18px 30px}
 .light.open{display:flex;justify-content:center;align-items:flex-start}
-.light img{max-width:min(1400px,96vw);height:auto}
-.close{position:fixed;right:18px;top:14px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:25px;cursor:pointer}
+.bigspread{display:flex;justify-content:center;align-items:flex-start;gap:2px;max-width:1500px;margin:0 auto}
+.bigspread img{display:block;max-width:50%;height:auto}
+.bigspread img.hide{display:none}
+.bigspread img.single{max-width:min(760px,92vw)}
+@media(max-width:700px){.bigspread{display:block}.bigspread img{max-width:96vw;width:100%;margin:0 auto}.bigspread #big2{display:none!important}}
+.close{position:fixed;right:18px;top:14px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:25px;cursor:pointer;z-index:10001}
+.lightnav{position:fixed;top:50%;transform:translateY(-50%);z-index:10001;width:52px;height:52px;border:0;border-radius:50%;background:#fff;color:#12603b;font-size:32px;box-shadow:0 4px 16px rgba(0,0,0,.25);cursor:pointer}
+.lightleft{left:18px}.lightright{right:18px}.lightnav:disabled{opacity:.28;cursor:default}
+@media(max-width:700px){.lightnav{width:42px;height:42px;font-size:27px}.lightleft{left:7px}.lightright{right:7px}}
 @media(max-width:700px){
  body{padding:0}.app,.hero{border-radius:0}
  .hero{padding:17px 11px 14px}.school{font-size:12px}.hero h1{font-size:25px}.hero p{font-size:11px}
@@ -88,7 +95,7 @@ body{padding:18px}
  <span class="count" id="count">1 / 32</span>
  <button class="nav" id="next">다음 ▶</button>
  <button class="zoom" id="zoomBtn">🔍 크게 보기</button>
- <a class="pdf" href="brochure.pdf" target="_blank" rel="noopener">📄 브로슈어 PDF</a>
+ <a class="pdf" href="brochure.pdf" target="_blank" rel="noopener">📄 입학안내 PDF 다운로드</a>
 </div>
 
 <div class="stage-wrap">
@@ -105,7 +112,12 @@ body{padding:18px}
 
 <div class="light" id="light">
  <button class="close" id="close">×</button>
- <img id="big" alt="확대된 브로슈어 페이지">
+ <button class="lightnav lightleft" id="lightPrev" aria-label="이전 펼침">‹</button>
+ <button class="lightnav lightright" id="lightNext" aria-label="다음 펼침">›</button>
+ <div class="bigspread" id="bigspread">
+  <img id="big1" alt="확대된 브로슈어 페이지">
+  <img id="big2" alt="확대된 브로슈어 페이지">
+ </div>
 </div>
 
 <script>
@@ -117,7 +129,7 @@ const count=document.getElementById('count'),bottom=document.getElementById('bot
 const prev=document.getElementById('prev'),next=document.getElementById('next');
 const sidePrev=document.getElementById('sidePrev'),sideNext=document.getElementById('sideNext');
 const stage=document.getElementById('stage'),deptBtn=document.getElementById('deptBtn'),deptSub=document.getElementById('deptSub');
-const light=document.getElementById('light'),big=document.getElementById('big');
+const light=document.getElementById('light'),big1=document.getElementById('big1'),big2=document.getElementById('big2'),lightPrev=document.getElementById('lightPrev'),lightNext=document.getElementById('lightNext'); let zoomCurrent=1;
 
 function normalize(n){if(n<=1)return 1; if(n>=32)return 32; return n%2===0?n:n-1}
 function label(){return (mobile()||current===1||current===32)?`${current} / 32`:`${current}–${current+1} / 32`}
@@ -149,11 +161,41 @@ function back(){if(mobile())go(current-1);else if(current===2)go(1);else if(curr
 function forward(){if(mobile())go(current+1);else if(current===1)go(2);else if(current===30)go(32);else go(current+2)}
 prev.onclick=sidePrev.onclick=back;next.onclick=sideNext.onclick=forward;
 
-function zoom(n){big.src=img(n);light.classList.add('open');document.body.style.overflow='hidden'}
+function zoom(n){
+ let start=n;
+ if(!mobile()){
+   if(n===1||n===32){start=n;}
+   else start=(n%2===0)?n:n-1;
+ }
+ zoomCurrent=start;
+ big1.src=img(start);big1.classList.toggle('single',mobile()||start===1||start===32);
+ if(!mobile()&&start>1&&start<32){
+   big2.src=img(start+1);big2.classList.remove('hide');
+ }else{
+   big2.classList.add('hide');
+ }
+ lightPrev.disabled=start===1;
+ lightNext.disabled=start===32;
+ light.classList.add('open');document.body.style.overflow='hidden';
+}
+function zoomBack(){
+ if(mobile()) zoom(Math.max(1,zoomCurrent-1));
+ else if(zoomCurrent===2) zoom(1);
+ else if(zoomCurrent===32) zoom(30);
+ else zoom(Math.max(1,zoomCurrent-2));
+}
+function zoomForward(){
+ if(mobile()) zoom(Math.min(32,zoomCurrent+1));
+ else if(zoomCurrent===1) zoom(2);
+ else if(zoomCurrent===30) zoom(32);
+ else zoom(Math.min(32,zoomCurrent+2));
+}
+lightPrev.onclick=zoomBack; lightNext.onclick=zoomForward;
 function closeZoom(){light.classList.remove('open');document.body.style.overflow=''}
 p1.onclick=()=>zoom(+p1.dataset.page);p2.onclick=()=>zoom(+p2.dataset.page);document.getElementById('zoomBtn').onclick=()=>zoom(current);
 document.getElementById('close').onclick=closeZoom;light.onclick=e=>{if(e.target===light)closeZoom()};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom();if(!light.classList.contains('open')&&e.key==='ArrowLeft')back();if(!light.classList.contains('open')&&e.key==='ArrowRight')forward()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom();if(light.classList.contains('open')&&e.key==='ArrowLeft')zoomBack();else if(!light.classList.contains('open')&&e.key==='ArrowLeft')back();if(light.classList.contains('open')&&e.key==='ArrowRight')zoomForward();else if(!light.classList.contains('open')&&e.key==='ArrowRight')forward()});
+let zsx=0;light.addEventListener('touchstart',e=>zsx=e.changedTouches[0].clientX,{passive:true});light.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-zsx;if(Math.abs(d)>55){if(d<0&&!lightNext.disabled)zoomForward();if(d>0&&!lightPrev.disabled)zoomBack()}},{passive:true});
 let sx=0;stage.addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});
 stage.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>55){if(d<0&&!next.disabled)forward();if(d>0&&!prev.disabled)back()}},{passive:true});
 addEventListener('resize',render);render();
